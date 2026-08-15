@@ -4,12 +4,16 @@ import type { RequestHandler } from "express";
 
 const usersPath = path.join(import.meta.dirname, "../../data/users.json");
 
-const getUsers: RequestHandler = async (req, res) => {
-  const data = await fs.readFile(usersPath, "utf8");
-  res.status(200).send(JSON.parse(data));
+const getUsers: RequestHandler = async (_req, res, next) => {
+  try {
+    const data = await fs.readFile(usersPath, "utf8");
+    res.status(200).send(JSON.parse(data));
+  } catch (err) {
+    next(err);
+  }
 };
 
-const getUserById: RequestHandler = async (req, res) => {
+const getUserById: RequestHandler = async (req, res, next) => {
   try {
     const data = await fs.readFile(usersPath, "utf8");
     const users = JSON.parse(data);
@@ -18,8 +22,8 @@ const getUserById: RequestHandler = async (req, res) => {
       return res.status(404).send({ message: "ID de usuario no encontrado" });
     }
     res.status(200).send(user);
-  } catch {
-    res.status(500).send({ message: "An error has occurred on the server" });
+  } catch (err) {
+    next(err);
   }
 };
 

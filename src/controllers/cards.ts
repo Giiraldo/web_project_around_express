@@ -4,16 +4,16 @@ import type { RequestHandler } from "express";
 
 const cardsPath = path.join(import.meta.dirname, "../../data/cards.json");
 
-const getCards: RequestHandler = async (req, res) => {
+const getCards: RequestHandler = async (_req, res, next) => {
   try {
     const data = await fs.readFile(cardsPath, "utf8");
     res.status(200).send(JSON.parse(data));
-  } catch {
-    res.status(500).send({ message: "An error has occurred on the server" });
+  } catch (err) {
+    next(err);
   }
 };
 
-const getCardById: RequestHandler = async (req, res) => {
+const getCardById: RequestHandler = async (req, res, next) => {
   try {
     const data = await fs.readFile(cardsPath, "utf8");
     const cards = JSON.parse(data);
@@ -22,8 +22,8 @@ const getCardById: RequestHandler = async (req, res) => {
       return res.status(404).send({ message: "ID de tarjeta no encontrado" });
     }
     res.status(200).send(card);
-  } catch {
-    res.status(500).send({ message: "An error has occurred on the server" });
+  } catch (err) {
+    next(err);
   }
 };
 
