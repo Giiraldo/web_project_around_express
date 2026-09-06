@@ -1,8 +1,8 @@
 # Tripleten web_project_around_express
 
-Este proyecto busca generar el servidor por medio de node.js y express como framework para traer imagenes y usuarios previamente creados en un arreglo, para realizarlo fueron utilizas consultas y respuestas de la API.
+Fracción de integracion de la API a la base de datos MONGO DB, se utilizó la biblioteca mongoose para la implementación de esquemas, validaciones y la traducción de los datos de DB en objetos de Javascript.
 
-Las tecnologías usadas fueron: Node.js, express.js, Typescript, JavaScript, CamelCase, Prettier, Linters, control de versiones
+Las tecnologías usadas fueron: Node.js, express.js, Typescript, JavaScript, CamelCase, Prettier, Linters, control de versiones, integración con MONGO DB
 
 Autor: Jerson Foronda
 
